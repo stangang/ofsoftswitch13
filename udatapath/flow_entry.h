@@ -66,6 +66,13 @@ struct flow_entry {
     bool                     no_byt_count; /* true if doesn't keep track of flow matched bytes*/
     struct list              group_refs;  /* list of groups referencing the flow. */
     struct list              meter_refs;  /* list of meters referencing the flow. */
+    
+    /* Packet sampling fields */
+    struct token_bucket     *sampling_bucket; /* Token bucket for rate limiting sampling */
+    uint32_t                sample_probability; /* Sampling probability (0-1000000) */
+    uint32_t                sampling_server_ip; /* Receiver server IP address */
+    uint16_t                sampling_server_port; /* Receiver server port */
+    bool                    sampling_enabled; /* Whether sampling is enabled for this flow */
 };
 
 struct packet;

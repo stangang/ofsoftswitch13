@@ -103,4 +103,14 @@ udatapath_libudatapath_a_SOURCES = \
 udatapath_libudatapath_a_CPPFLAGS = $(AM_CPPFLAGS)
 udatapath_libudatapath_a_CPPFLAGS += -DOF_HW_PLAT -DUDATAPATH_AS_LIB -g -lnbee_link
 
+# 添加新源文件
+udatapath_libofdatapath_a_SOURCES += \
+    udatapath/token_bucket.c \
+    udatapath/packet_sampler.c
+
+# 添加新头文件
+noinst_HEADERS += \
+    udatapath/token_bucket.h \
+    udatapath/packet_sampler.h
+	
 endif

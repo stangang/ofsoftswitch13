@@ -881,6 +881,19 @@ pop_pbb(struct packet *pkt, struct ofl_action_header *act UNUSED) {
     }
 }
 
+/*Executes sample packet action. */
+static void
+sample_packet(struct packet *pkt, struct ofp_action_sample *act) {
+    /* This action doesn't modify the packet, it just samples it.
+     * The actual sampling logic is handled in the flow entry execution
+     * to ensure it happens before the packet is forwarded. */
+    VLOG_DBG_RL(LOG_MODULE, &rl, "Sample action executed: probability=%u, max_rate=%u, server=%u.%u.%u.%u:%u",
+                act->sample_probability, act->max_rate,
+                (act->server_ip >> 24) & 0xFF, (act->server_ip >> 16) & 0xFF,
+                (act->server_ip >> 8) & 0xFF, act->server_ip & 0xFF,
+                act->server_port);
+}
+
 
 /* Executes set queue action. */
 static void
@@ -1016,6 +1029,10 @@ dp_execute_action(struct packet *pkt,
         }
         case (OFPAT_POP_PBB):{
             pop_pbb(pkt, action);
+            break;
+        }
+        case (OFPAT_SAMPLE): {
+            sample_packet(pkt, (struct ofp_action_sample *)action);
             break;
         }
         case (OFPAT_EXPERIMENTER): {
@@ -1223,4 +1240,3 @@ dp_actions_check_set_field_req(struct ofl_msg_flow_mod *msg, size_t actions_num,
     }
     return 0;
 }
-

@@ -944,6 +944,7 @@ enum ofp_action_type {
     OFPAT_SET_FIELD    = 25, /* Set a header field using OXM TLV format. */
     OFPAT_PUSH_PBB     = 26, /* Push a new PBB service tag (I-TAG) */
     OFPAT_POP_PBB      = 27, /* Pop the outer PBB service tag (I-TAG) */
+    OFPAT_SAMPLE       = 28, /* Packet sampling action */
     OFPAT_EXPERIMENTER = 0xffff
 };
 
@@ -1050,6 +1051,54 @@ struct ofp_action_experimenter_header {
                                        ofp_experimenter_header. */
 };
 OFP_ASSERT(sizeof(struct ofp_action_experimenter_header) == 8);
+
+/* Action structure for OFPAT_SAMPLE. */
+struct ofp_action_sample {
+    uint16_t type;                  /* OFPAT_SAMPLE. */
+    uint16_t len;                   /* Length is 24. */
+    uint32_t sample_probability;    /* Sampling probability (0-1000000, where 1000000 = 100%) */
+    uint32_t max_rate;              /* Maximum sampling rate (packets per second) */
+    uint32_t server_ip;             /* Receiver server IP address */
+    uint16_t server_port;           /* Receiver server port */
+    uint8_t pad[6];                 /* Pad to 64 bits */
+};
+OFP_ASSERT(sizeof(struct ofp_action_sample) == 24);
+
+/* Action structure for OFPAT_SAMPLE. */
+struct ofp_action_sample {
+    uint16_t type;                  /* OFPAT_SAMPLE. */
+    uint16_t len;                   /* Length is 24. */
+    uint32_t sample_probability;    /* Sampling probability (0-1000000, where 1000000 = 100%) */
+    uint32_t max_rate;              /* Maximum sampling rate (packets per second) */
+    uint32_t server_ip;             /* Receiver server IP address */
+    uint16_t server_port;           /* Receiver server port */
+    uint8_t pad[6];                 /* Pad to 64 bits */
+};
+OFP_ASSERT(sizeof(struct ofp_action_sample) == 24);
+
+/* Action structure for OFPAT_SAMPLE. */
+struct ofp_action_sample {
+    uint16_t type;                  /* OFPAT_SAMPLE. */
+    uint16_t len;                   /* Length is 24. */
+    uint32_t sample_probability;    /* Sampling probability (0-1000000, where 1000000 = 100%) */
+    uint32_t max_rate;              /* Maximum sampling rate (packets per second) */
+    uint32_t server_ip;             /* Receiver server IP address */
+    uint16_t server_port;           /* Receiver server port */
+    uint8_t pad[6];                 /* Pad to 64 bits */
+};
+OFP_ASSERT(sizeof(struct ofp_action_sample) == 24);
+
+/* Action structure for OFPAT_SAMPLE. */
+struct ofp_action_sample {
+    uint16_t type;                  /* OFPAT_SAMPLE. */
+    uint16_t len;                   /* Length is 24. */
+    uint32_t sample_probability;    /* Sampling probability (0-1000000, where 1000000 = 100%) */
+    uint32_t max_rate;              /* Maximum sampling rate (packets per second) */
+    uint32_t server_ip;             /* Receiver server IP address */
+    uint16_t server_port;           /* Receiver server port */
+    uint8_t pad[6];                 /* Pad to 64 bits */
+};
+OFP_ASSERT(sizeof(struct ofp_action_sample) == 24);
 
 /* ## ---------------------- ## */
 /* ## OpenFlow Instructions. ## */

@@ -46,3 +46,8 @@ utilities_ofp_kill_LDADD = lib/libopenflow.a
 utilities_ofp_read_SOURCES = utilities/ofp-read.c
 utilities_ofp_read_LDADD = lib/libopenflow.a oflib/liboflib.a
 
+bin_PROGRAMS += utilities/packet_receiver utilities/sample_flow_mod
+
+utilities_packet_receiver_SOURCES = utilities/packet_receiver.c
+utilities_sample_flow_mod_SOURCES = utilities/sample_flow_mod.c
+
